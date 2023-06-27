@@ -1,4 +1,5 @@
 ﻿using MyBlazor.Lib.Models;
+using MyBlazor.Lib.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,25 @@ namespace MyBlazor.Lib.Services
 {
     public class ProductService : IProductService
     {
+        private readonly IStorageService _storageService;
+
+        public ProductService(IStorageService storageService)
+        {
+            _storageService = storageService;
+        }
         public IList<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _storageService.Products.ToList();
         }
 
         public Product GetProduct(string Sku)
         {
-            throw new NotImplementedException();
+            return _storageService.Products.FirstOrDefault(p => p.Sku == Sku);  
         }
 
         public Product GetProductBySlug(string Slug)
         {
-            throw new NotImplementedException();
+            return _storageService.Products.FirstOrDefault(p => p.Slug == Slug);
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿@using MyBlazor.Lib.Models
+
+
+
+
+    <div class="card border-success col-3 m-3" style="max-width: 18rem;padding:0;">
+  <img class="card-img-top" src="/Images/@product.Image" alt="Card image cap">
+  <div class="card-body text-success">
+    <h5 class="card-title">@product.Name</h5>
+    <p class="card-text">@product.Description</p>
+  </div>
+  <div class="card-footer bg-transparent border-success">قیمت : @product.Price</div>
+</div>
+
+
+@code {
+    [Parameter]
+    public  Product? product { get; set; }
+}

@@ -1,0 +1,31 @@
+﻿@page "/ProductList"
+@using MyBlazor.Lib.Models
+@using MyBlazor.Lib.Services
+@inject IProductService productservice
+<PageTitle> Latest Product</PageTitle>
+
+
+<h3> Show lastest Products</h3>
+
+<div class="row">
+    @foreach (var pro in Products)
+    {
+        <ProductBox product="pro" />
+    }
+</div>
+
+
+
+@code {
+
+
+    public IList<Product>? Products { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Products = productservice.GetAll();
+        base.OnInitialized();
+
+
+    }
+}

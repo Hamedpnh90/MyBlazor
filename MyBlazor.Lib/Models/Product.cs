@@ -34,7 +34,7 @@ namespace MyBlazor.Lib.Models
             this.Name = name;
             this.Description = description;
             this.Price = Price;
-        this.Image = image;
+            this.Image = image;
             
         }
     }
