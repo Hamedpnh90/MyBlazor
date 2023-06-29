@@ -1,0 +1,45 @@
+﻿@page "/product/{Slug}"
+@using MyBlazor.Lib.Models
+@using MyBlazor.Lib.Services
+@inject IProductService ProductService
+
+
+
+<h3>جزئیات محصول @product.Name</h3>
+
+<br />
+<ProductBox product="product" />
+<div class="card">
+  <div class="card-body">
+    Other Products
+  </div>
+</div>
+<br/>
+
+<div class="row">
+    @foreach (var item in products)
+{
+    <ProductBox product="item" />
+}
+</div>
+
+
+@code {
+
+    public Product? product { get; set; }
+    public IList<Product>? products { get; set; }
+    [Parameter]
+    public string Slug { get; set; }
+    protected override void OnInitialized()
+    {
+        products = ProductService.GetAll();
+        product = ProductService.GetProductBySlug(Slug);
+        base.OnInitialized();
+    }
+
+    protected override void OnParametersSet()
+    {
+         product = ProductService.GetProductBySlug(Slug);
+        base.OnParametersSet();
+    }
+}

@@ -9,7 +9,9 @@
     <h5 class="card-title">@product.Name</h5>
     <p class="card-text">@product.Description</p>
   </div>
-  <div class="card-footer bg-transparent border-success">قیمت : @product.Price</div>
+  <div class="card-footer bg-transparent border-success">قیمت : <a href="@product.FullUrl">
+      @product.Price
+  </a></div>
 </div>
 
 
