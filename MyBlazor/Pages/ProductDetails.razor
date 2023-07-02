@@ -2,31 +2,88 @@
 @using MyBlazor.Lib.Models
 @using MyBlazor.Lib.Services
 @inject IProductService ProductService
+@inject IShoppingService ShoppingService
 
 
 
-<h3>جزئیات محصول @product.Name</h3>
+<h3>Product Details @product.Name</h3>
+
+  
 
 <br />
-<ProductBox product="product" />
-<div class="card">
-  <div class="card-body">
-    Other Products
-  </div>
+
+<div class="row">
+    <div class="SideBarimge col-4">
+         <img class="card-img-top img-thumbnail" src="/Images/@product.Image" alt="Card image cap">
+    </div>
+    <div class="contentside col-6">
+
+        <p></p>
+        <p></p>
+        <input type="number" placeholder="Quantity" @bind="Quantity" />
+        <button type="button" class="btn btn-outline-dark" @onclick="AddToCart">
+
+            @if(ShoppingService.ProductExist(product.Sku))
+            {
+                 <span>
+                @if(Quantity.HasValue)
+                {
+                  
+                    <text>
+                        @Quantity More
+                    </text>
+
+                    }
+                    else
+                    {
+                        
+                       <text>
+                           Add
+                       </text>
+                    }
+                </span>
+            }
+            else
+            {
+                <span>
+                    AddToCart
+                </span>
+
+            }
+
+        </button>
+
+        <p>
+              you have @ShoppingService.count() items in your basket
+        </p>
+    </div>
 </div>
-<br/>
+
+
+
+<div class="card">
+    <div class="card-body">
+        Other Products
+    </div>
+</div>
+<br />
 
 <div class="row">
     @foreach (var item in products)
-{
-    <ProductBox product="item" />
-}
+    {
+        <ProductBox product="item" />
+    }
 </div>
 
 
 @code {
 
+
     public Product? product { get; set; }
+
+    public int? Quantity { get; set; }
+
+
     public IList<Product>? products { get; set; }
     [Parameter]
     public string Slug { get; set; }
@@ -39,7 +96,14 @@
 
     protected override void OnParametersSet()
     {
-         product = ProductService.GetProductBySlug(Slug);
+        product = ProductService.GetProductBySlug(Slug);
         base.OnParametersSet();
+    }
+
+    public void AddToCart()
+    {
+        ShoppingService.AddProduct(product, Quantity ?? 1);
+
+        Quantity = null;
     }
 }
