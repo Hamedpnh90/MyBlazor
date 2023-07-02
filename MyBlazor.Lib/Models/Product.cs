@@ -13,7 +13,7 @@ namespace MyBlazor.Lib.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public string Price { get; set; }
+        public int Price { get; set; }
         public string Slug
         {
             get
@@ -28,7 +28,7 @@ namespace MyBlazor.Lib.Models
             
             } }
 
-        public Product(string sku,string name,string image,string description,string Price)
+        public Product(string sku,string name,string image,string description,int Price)
         {
             this.Sku = sku; 
             this.Name = name;
