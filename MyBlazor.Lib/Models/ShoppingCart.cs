@@ -8,7 +8,7 @@ namespace MyBlazor.Lib.Models
 {
     public class ShoppingCart
     {
-        IList<ShoppingCartItem> Items { get;  }
+       public IList<ShoppingCartItem> Items { get;  }
 
         public ShoppingCart()
         {
