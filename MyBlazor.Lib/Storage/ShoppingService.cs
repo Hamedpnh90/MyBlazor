@@ -51,6 +51,21 @@ namespace MyBlazor.Lib.Storage
                 
             
         }
+        public void DeleteProduct(Product item)
+        {
+
+            var items = GetAll().Items;
+            if (ProductExist(item.Sku))
+            {
+                items.Remove(items.First(i => i.product.Sku == item.Sku));
+            }
+
+
+
+
+        }
+
+
 
         public ShoppingCart GetAll()
         {

@@ -15,7 +15,7 @@ namespace MyBlazor.Lib.Services
 
 
         void DeleteCartItem(ShoppingCartItem item);
-
+        public void DeleteProduct(Product item);
         bool ProductExist(string Sku);
 
         int count();

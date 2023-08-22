@@ -26,7 +26,7 @@
              <td>@item.Price</td>
              <td>@item.TotalPrice</td>
              <td>
-              <button type="button" class="btn btn-outline-dark" @onclick="DeleteItem()">
+              <a class="btn  btn-outline-danger"  @onclick="(() => DeletePro(item.product))">delete</a>
              </td>
          </tr>
      }
@@ -39,9 +39,20 @@
 
     public IList<ShoppingCartItem>? items { get; set; }
 
+    [Parameter]
+    public string sku { get; set; }
+
     protected override void OnInitialized()
     {
-       items = ShoppingService.GetAll().Items;
+        items = ShoppingService.GetAll().Items;
+    }
+
+
+    public void DeletePro(Product product)
+    {
+        ShoppingService.DeleteProduct(product);
+
+       
     }
 
 }
