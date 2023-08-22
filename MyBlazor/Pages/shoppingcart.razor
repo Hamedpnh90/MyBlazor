@@ -1,0 +1,47 @@
+﻿@page "/Cart"
+@using MyBlazor.Lib.Models
+@using MyBlazor.Lib.Services
+@inject IShoppingService ShoppingService
+
+
+<h3>shoppingcart</h3>
+
+<div class="row">
+
+    <table class="table table-bordered table-hover">
+
+      <tr>
+         <th>نام</th>
+         <th>تعداد</th>
+         <th>قیمت</th>
+         <th>جمع</th>
+         <th>دستورات</th>
+      </tr>
+
+      @foreach (var item in items)
+     {
+         <tr>
+             <td>@item.product.Name</td>
+             <td>@item.Quantity</td>
+             <td>@item.Price</td>
+             <td>@item.TotalPrice</td>
+             <td>
+              <button type="button" class="btn btn-outline-dark" @onclick="DeleteItem()">
+             </td>
+         </tr>
+     }
+
+    </table>
+
+</div>
+
+@code {
+
+    public IList<ShoppingCartItem>? items { get; set; }
+
+    protected override void OnInitialized()
+    {
+       items = ShoppingService.GetAll().Items;
+    }
+
+}
